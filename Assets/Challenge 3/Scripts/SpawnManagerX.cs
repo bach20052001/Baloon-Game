@@ -8,13 +8,10 @@ public class SpawnManagerX : MonoBehaviour
     private float spawnDelay = 0.5f;
     private float spawnInterval = 1.5f;
 
-    private PlayerControllerX playerControllerScript;
-
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating(nameof(SpawnObjects), spawnDelay, spawnInterval);
-        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerControllerX>();
     }
 
     // Spawn obstacles
@@ -25,7 +22,7 @@ public class SpawnManagerX : MonoBehaviour
         int index = Random.Range(0, objectPrefabs.Length);
 
         // If game is still active, spawn new object
-        if (!playerControllerScript.gameOver)
+        if (GameManager.Instance.GameState == GameBaseState.PLAY)
         {
             Instantiate(objectPrefabs[index], spawnLocation, objectPrefabs[index].transform.rotation);
         }
