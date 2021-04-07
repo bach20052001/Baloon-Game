@@ -78,11 +78,14 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         this.PostEvent(EventID.OnGamePause);
+        TransitionGameState(GameBaseState.PAUSE);
+
     }
 
     public void PlayGame()
     {
         Time.timeScale = 1;
         this.PostEvent(EventID.OnGamePlay);
+        TransitionGameState(GameBaseState.PLAY);
     }
 }
